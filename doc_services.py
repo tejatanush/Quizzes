@@ -2,9 +2,7 @@ import nltk
 import fitz
 import os
 import base64
-project_root = os.path.dirname(os.path.abspath(__file__))  
-nltk_data_path = os.path.join(project_root, "nltk_data")
-nltk.data.path.append(nltk_data_path)
+nltk.download('punkt_tab')
 import tiktoken
 from nltk.tokenize import sent_tokenize
 from langchain_core.prompts import PromptTemplate
