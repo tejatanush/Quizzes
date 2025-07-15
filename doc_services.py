@@ -1,10 +1,12 @@
 import nltk
 import fitz
+import os
 import base64
-nltk.data.path.append("./nltk_data")
+project_root = os.path.dirname(os.path.abspath(__file__))  
+nltk_data_path = os.path.join(project_root, "nltk_data")
+nltk.data.path.append(nltk_data_path)
 import tiktoken
 from nltk.tokenize import sent_tokenize
-import os
 from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain_core.output_parsers import StrOutputParser
