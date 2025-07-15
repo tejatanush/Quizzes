@@ -285,29 +285,29 @@ Return only the summary, focusing on making it informative and quiz-relevant.
         return ""
 
     def get_image_summary(self, filepath: str) -> str:
-        """Generate summary of all images in document"""
+        """Generate summary of first 10 images in the document"""
         try:
-            text_content, image_content = self.get_and_extract_file(filepath)
-            
+            _, image_content = self.get_and_extract_file(filepath)
+
             if not image_content:
                 logger.info("No images found in document")
                 return ""
-            
+
             image_summaries = []
-            
-            for i, img_b64 in enumerate(image_content):
-                if i >= 50:  
-                    break
-                    
+
+            # Only take the first 10 images
+            for i, img_b64 in enumerate(image_content[:10]):
                 summary = self.describe_image_base64(img_b64)
                 if summary:
                     image_summaries.append(summary)
-            
+
             final_image_summary = "\n\n".join(image_summaries)
             return final_image_summary
+
         except Exception as e:
             logger.error(f"Error generating image summary: {str(e)}")
             return ""
+
 
     def count_tokens(self, text: str, model: str = "gpt-3.5-turbo") -> int:
         """Count tokens in text"""
